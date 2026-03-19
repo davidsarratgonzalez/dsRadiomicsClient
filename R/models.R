@@ -20,6 +20,14 @@ ds.segmenter.totalsegmentator <- function(task = "total", fast = FALSE,
        roi_subset = roi_subset)
 }
 
+#' LungMask segmenter (lung/lobe specific)
+#' @param model Character; "R231", "LTRCLobes", "LTRCLobes_R231", "R231CovidWeb".
+#' @return A segmenter spec.
+#' @export
+ds.segmenter.lungmask <- function(model = "R231") {
+  list(provider = "lungmask_infer", model_name = model)
+}
+
 #' nnU-Net v2 segmenter
 #' @param model_name Character; registered model name.
 #' @param fold Character; fold to use (default "all").
