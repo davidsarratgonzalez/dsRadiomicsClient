@@ -1,0 +1,31 @@
+Package: dsRadiomicsClient
+Type: Package
+Title: DataSHIELD Client for Radiomics Workflows
+Version: 0.1.0
+Authors@R: c(
+    person("David", "Sarrat González", role = c("aut", "cre"), email = "david.sarrat@isglobal.org"),
+    person("Juan R", "González", role = "aut", email = "juanr.gonzalez@isglobal.org"))
+Description: Client-side DataSHIELD package for radiomics feature extraction
+    and image segmentation workflows. Compiles domain-specific operations
+    (extract, segment, segment+extract) into generic dsJobsClient jobs.
+    Handles deduplication via dsImaging asset catalog, provides profile
+    and model constructors, and integrates with dsFlower for federated
+    learning on extracted features.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends:
+    R (>= 4.1.0)
+Imports:
+    DSI,
+    dsJobsClient,
+    dsImaging,
+    dsImagingClient,
+    jsonlite
+Suggests:
+    DSOpal,
+    opalr,
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
