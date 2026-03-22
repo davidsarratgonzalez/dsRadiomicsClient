@@ -68,6 +68,7 @@ ds.radiomics.process_collection <- function(conns, dataset_id,
   generation_id <- result$generation_id
   pending_ids <- result$pending_ids
   fingerprints <- result$fingerprints
+  content_hashes <- result$content_hashes %||% list()
   total <- result$total
   done <- result$done %||% 0L
 
@@ -86,6 +87,7 @@ ds.radiomics.process_collection <- function(conns, dataset_id,
   # batches as jobs complete. No client connection needed after this.
   first_batch <- pending_ids[seq_len(min(batch_size, length(pending_ids)))]
   first_fps <- fingerprints[first_batch]
+  first_chs <- content_hashes[first_batch]
 
   message("  Submitting first batch (", length(first_batch), " images)...")
   message("  Server will auto-submit remaining batches as jobs complete.")
@@ -96,7 +98,8 @@ ds.radiomics.process_collection <- function(conns, dataset_id,
     .ds_encode(segmenter),
     .ds_encode(profile),
     .ds_encode(dataset_id),
-    .ds_encode(first_fps))
+    .ds_encode(first_fps),
+    .ds_encode(first_chs))
 
   # Fire-and-forget mode: return immediately
   if (timeout == 0) {
