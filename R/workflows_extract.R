@@ -11,7 +11,7 @@
 #' @param image_asset Character; asset_id or alias for images (default "images").
 #' @param mask_asset Character; asset_id or alias for masks.
 #' @param profile A radiomics profile from ds.radiomics.profile.*().
-#' @param visibility Character; "global" or "private".
+#' @param visibility Character; job visibility label (default "global").
 #' @param alias Character or NULL; alias for the published feature table.
 #' @return A dsjobs_submission or existing asset_id if deduplicated.
 #' @export

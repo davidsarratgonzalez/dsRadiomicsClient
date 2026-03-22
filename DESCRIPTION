@@ -7,10 +7,11 @@ Authors@R: c(
     person("Juan R", "González", role = "aut", email = "juanr.gonzalez@isglobal.org"))
 Description: Client-side DataSHIELD package for radiomics feature extraction
     and image segmentation workflows. Compiles domain-specific operations
-    (extract, segment, segment+extract) into generic dsJobsClient jobs.
-    Handles deduplication via dsImaging asset catalog, provides profile
-    and model constructors, and integrates with dsFlower for federated
-    learning on extracted features.
+    (extract, segment, segment+extract, process_collection) into generic
+    dsJobsClient jobs. Handles deduplication via dsImaging asset catalog
+    at both collection and per-image level, provides profile and model
+    constructors, and integrates with dsFlower for federated learning on
+    extracted features.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends:

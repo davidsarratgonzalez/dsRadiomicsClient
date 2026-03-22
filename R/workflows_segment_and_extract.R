@@ -10,7 +10,7 @@
 #' @param image_asset Character; asset_id or alias for images.
 #' @param segmenter A segmenter from ds.segmenter.*().
 #' @param profile A radiomics profile from ds.radiomics.profile.*().
-#' @param visibility Character; "global" or "private".
+#' @param visibility Character; job visibility label (default "global").
 #' @return A dsjobs_submission.
 #' @export
 ds.radiomics.segment_and_extract <- function(conns, dataset_id,

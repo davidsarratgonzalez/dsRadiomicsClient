@@ -6,7 +6,7 @@
 #' @param dataset_id Character; dataset identifier.
 #' @param image_asset Character; asset_id or alias for images.
 #' @param segmenter A segmenter from ds.segmenter.*().
-#' @param visibility Character; "global" or "private".
+#' @param visibility Character; job visibility label (default "global").
 #' @param alias Character or NULL; alias for the published mask.
 #' @return A dsjobs_submission or existing asset_id.
 #' @export
