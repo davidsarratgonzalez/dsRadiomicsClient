@@ -256,18 +256,4 @@ ds.radiomics.collection_publish <- function(conns, generation_id,
   jsonlite::base64_enc(charToRaw(as.character(json)))
 }
 
-#' @keywords internal
-.ds_safe_aggregate <- function(conns, method, ...) {
-  args <- list(...)
-  call_args <- c(list(as.name(method)), args)
-  expr <- as.call(call_args)
-  tryCatch(
-    DSI::datashield.aggregate(conns, expr),
-    error = function(e) {
-      warning("Server call failed (", method, "): ", conditionMessage(e),
-              call. = FALSE)
-      srvs <- if (inherits(conns, "DSConnection")) "default"
-              else names(conns)
-      stats::setNames(replicate(length(srvs), NULL, simplify = FALSE), srvs)
-    })
-}
+# .ds_safe_aggregate moved to utils.R

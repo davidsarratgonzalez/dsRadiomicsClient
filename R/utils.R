@@ -18,15 +18,32 @@
 }
 
 #' Resilient datashield.aggregate that tolerates per-server failures
+#'
+#' Accepts either a pre-built call expression or a method name + arguments.
+#'
+#' @param conns DSI connections object.
+#' @param expr A call expression, OR a character method name (legacy).
+#' @param ... Additional arguments if expr is a method name string.
 #' @keywords internal
-.ds_safe_aggregate <- function(conns, expr) {
-  server_names <- names(conns)
+.ds_safe_aggregate <- function(conns, expr, ...) {
+  # Support both styles:
+  # .ds_safe_aggregate(conns, expr = call("methodDS", arg1, arg2))
+  # .ds_safe_aggregate(conns, "methodDS", arg1, arg2)
+  if (is.character(expr)) {
+    args <- list(...)
+    call_args <- c(list(as.name(expr)), args)
+    expr <- as.call(call_args)
+  }
+
+  server_names <- if (inherits(conns, "DSConnection")) "default" else names(conns)
   results <- list()
   errors <- list()
   for (srv in server_names) {
     tryCatch({
-      res <- DSI::datashield.aggregate(conns[srv], expr = expr)
-      results[[srv]] <- res[[srv]]
+      res <- DSI::datashield.aggregate(
+        if (srv == "default") conns else conns[srv],
+        expr = expr)
+      results[[srv]] <- if (srv == "default") res else res[[srv]]
     }, error = function(e) {
       errors[[srv]] <<- e$message
     })
