@@ -13,8 +13,8 @@
 #' @return Named list with install status per server.
 #' @export
 ds.radiomics.install_model <- function(conns, admin_key, provider, task) {
-  key_enc <- dsJobsClient::.ds_encode(list(.admin_key = admin_key))
-  results <- dsJobsClient::.ds_safe_aggregate(conns,
+  key_enc <- .ds_encode(list(.admin_key = admin_key))
+  results <- .ds_safe_aggregate(conns,
     expr = call("radiomicsInstallModelDS", key_enc, provider, task))
   for (srv in names(results)) {
     r <- results[[srv]]
@@ -32,6 +32,6 @@ ds.radiomics.install_model <- function(conns, admin_key, provider, task) {
 #' @return Named list with per-server model listings.
 #' @export
 ds.radiomics.models <- function(conns) {
-  dsJobsClient::.ds_safe_aggregate(conns,
+  .ds_safe_aggregate(conns,
     expr = call("radiomicsListModelsDS"))
 }

@@ -32,5 +32,5 @@ ds.radiomics.masks <- function(conns, dataset_id) {
 #' @return Named list of per-server capabilities.
 #' @export
 ds.radiomics.capabilities <- function(conns) {
-  dsJobsClient::.ds_safe_aggregate(conns, expr = call("radiomicsCapabilitiesDS"))
+  .ds_safe_aggregate(conns, expr = call("radiomicsCapabilitiesDS"))
 }
