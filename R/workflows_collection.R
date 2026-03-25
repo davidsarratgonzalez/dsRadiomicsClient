@@ -250,10 +250,4 @@ ds.radiomics.collection_publish <- function(conns, generation_id,
   )
 }
 
-#' @keywords internal
-.ds_encode <- function(x) {
-  json <- jsonlite::toJSON(x, auto_unbox = TRUE)
-  jsonlite::base64_enc(charToRaw(as.character(json)))
-}
-
-# .ds_safe_aggregate moved to utils.R
+# .ds_encode and .ds_safe_aggregate moved to utils.R

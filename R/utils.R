@@ -2,19 +2,19 @@
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
-#' Encode complex R objects as JSON for DataSHIELD transport
+#' Encode R objects as B64 JSON for DataSHIELD transport
+#'
+#' Always encodes (unlike dsFlowerClient's version which skips scalars).
+#' dsRadiomics server-side expects B64-encoded arguments.
+#'
 #' @keywords internal
 .ds_encode <- function(x) {
-  if (is.list(x) || (is.vector(x) && length(x) > 1)) {
-    json <- as.character(jsonlite::toJSON(x, auto_unbox = TRUE, null = "null"))
-    b64 <- gsub("[\r\n]", "", jsonlite::base64_enc(charToRaw(json)))
-    b64 <- gsub("\\+", "-", b64)
-    b64 <- gsub("/", "_", b64)
-    b64 <- gsub("=+$", "", b64)
-    paste0("B64:", b64)
-  } else {
-    x
-  }
+  json <- as.character(jsonlite::toJSON(x, auto_unbox = TRUE, null = "null"))
+  b64 <- gsub("[\r\n]", "", jsonlite::base64_enc(charToRaw(json)))
+  b64 <- gsub("\\+", "-", b64)
+  b64 <- gsub("/", "_", b64)
+  b64 <- gsub("=+$", "", b64)
+  paste0("B64:", b64)
 }
 
 #' Resilient datashield.aggregate that tolerates per-server failures
